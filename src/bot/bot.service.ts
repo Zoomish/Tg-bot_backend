@@ -80,7 +80,9 @@ export class BotService implements OnModuleInit {
                     : ''
             } вы получили репутацию! Участник ${
                 msg.from.first_name
-            } повысил твою репутацию`
+            } повысил твою репутацию. Твоя репутация ${
+                reputationData.reputation
+            }`
         )
     }
 

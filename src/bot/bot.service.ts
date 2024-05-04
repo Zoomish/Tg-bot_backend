@@ -29,4 +29,25 @@ export class BotService implements OnModuleInit {
             }
         })
     }
+
+    async handleThanksWordReaction(msg: TelegramBot.Message, bot: TelegramBot) {
+        const avatarUrl = await this.getUserAvatarUrl(
+            msg.reply_to_message.from.id,
+            bot
+        )
+        console.log(avatarUrl)
+    }
+
+    async getUserAvatarUrl(userId: number, bot: TelegramBot) {
+        const userProfile = await bot.getUserProfilePhotos(userId)
+        if (!userProfile.photos.length) {
+            return ''
+        }
+
+        const fileId = userProfile.photos[0][0].file_id
+        const file = await bot.getFile(fileId)
+        const filePath = file.file_path
+
+        return `https://api.telegram.org/bot${process.env.BOT_API_TOKEN}/${filePath}`
+    }
 }

@@ -48,6 +48,6 @@ export class BotService implements OnModuleInit {
         const file = await bot.getFile(fileId)
         const filePath = file.file_path
 
-        return `https://api.telegram.org/bot${process.env.BOT_API_TOKEN}/${filePath}`
+        return `https://api.telegram.org/file/bot${process.env.BOT_API_TOKEN}/${filePath}`
     }
 }

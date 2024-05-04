@@ -6,7 +6,7 @@ import { PrismaService } from 'src/prizma.service';
 export class BotService implements OnModuleInit {
     constructor(private readonly prisma: PrismaService) {}
   async onModuleInit() {
-    await this.prisma.$connect();
+    await this.botMesssage();
   }
 
   async botMesssage(){

@@ -38,6 +38,17 @@ export class BotService implements OnModuleInit {
         })
     }
 
+    async UpdateReputation(reputation: number, id: number): Promise<void> {
+        await this.prisma.reputations.update({
+            where: {
+                id,
+            },
+            data: {
+                reputation,
+            },
+        })
+    }
+
     async handleThanksWordReaction(msg: TelegramBot.Message, bot: TelegramBot) {
         const avatarUrl = await this.getUserAvatarUrl(
             msg.reply_to_message.from.id,

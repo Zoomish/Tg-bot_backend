@@ -1,4 +1,5 @@
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common'
+import { Reputations } from '@prisma/client'
 import TelegramBot = require('node-telegram-bot-api')
 import { PrismaService } from 'src/prizma.service'
 
@@ -29,13 +30,22 @@ export class BotService implements OnModuleInit {
             }
         })
     }
+    async getReputation(telegramId: string): Promise<Reputations> {
+        return await this.prisma.reputations.findFirst({
+            where: {
+                telegramId,
+            },
+        })
+    }
 
     async handleThanksWordReaction(msg: TelegramBot.Message, bot: TelegramBot) {
         const avatarUrl = await this.getUserAvatarUrl(
             msg.reply_to_message.from.id,
             bot
         )
-        console.log(avatarUrl)
+        const reputationData = await this.getReputation(
+            String(msg.reply_to_message.from.id)
+        )
     }
 
     async getUserAvatarUrl(userId: number, bot: TelegramBot) {

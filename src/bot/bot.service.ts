@@ -78,7 +78,9 @@ export class BotService implements OnModuleInit {
                 msg.reply_to_message.from?.username
                     ? `(@${msg.reply_to_message.from.username})`
                     : ''
-            } вы получили репутацию!`
+            } вы получили репутацию! Участник ${
+                msg.from.first_name
+            } повысил твою репутацию`
         )
     }
 

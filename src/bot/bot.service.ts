@@ -88,7 +88,8 @@ export class BotService implements OnModuleInit {
                     inline_keyboard: [
                         [
                             {
-                                text: '👍',
+                                text: 'Статистика чата',
+                                url: 'www.google.com',
                             },
                         ],
                     ],

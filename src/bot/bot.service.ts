@@ -73,6 +73,7 @@ export class BotService implements OnModuleInit {
             userName,
             userAvatar,
             fullName,
+            reputation: 1,
         })
     }
 

@@ -82,7 +82,18 @@ export class BotService implements OnModuleInit {
                 msg.from.first_name
             } повысил твою репутацию. Твоя репутация ${
                 reputationData.reputation
-            }`
+            }`,
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: '👍',
+                            },
+                        ],
+                    ],
+                },
+            }
         )
     }
 

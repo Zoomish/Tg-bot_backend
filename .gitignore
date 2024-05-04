@@ -15,7 +15,7 @@ lerna-debug.log*
 # OS
 .DS_Store
 
-migrations
+/migrations
 
 # Tests
 /coverage

@@ -1,10 +1,10 @@
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
-import TelegramBot from 'node-telegram-bot-api';
+import TelegramBot = require('node-telegram-bot-api');
+import { PrismaService } from 'src/prizma.service';
 
 @Injectable()
 export class BotService implements OnModuleInit {
-    constructor(private readonly prisma: PrismaClient) {}
+    constructor(private readonly prisma: PrismaService) {}
   async onModuleInit() {
     await this.prisma.$connect();
   }
@@ -14,6 +14,6 @@ export class BotService implements OnModuleInit {
         polling: true
     })
 
-    bot.on('new_chat_members', (msg) => bot.sendMessage(msg.chat.id, `Привет, ${msg.new_chat_members[0]}!`))
+    bot.on('new_chat_members', (msg) => bot.sendMessage(msg.chat.id, `Привет, ${msg.new_chat_members[0].first_name}!`))
   }
 }

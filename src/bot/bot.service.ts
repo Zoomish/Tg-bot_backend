@@ -60,17 +60,11 @@ export class BotService implements OnModuleInit {
         bot: TelegramBot,
         telegramId: string
     ) {
+        const reputationData = await this.getReputation(String(telegramId))
+
         bot.sendMessage(
             chatId,
-            `Поздравляю, ${replyUserName} ${
-                msg.reply_to_message.from?.username
-                    ? `(@${msg.reply_to_message.from.username})`
-                    : ''
-            } вы получили репутацию! Участник ${
-                msg.from.first_name
-            } повысил твою репутацию. Твоя репутация ${
-                reputationData.reputation
-            }`,
+            `Поздравляю, ${replyUserName} вы получили репутацию! Участник ${fromUserName} повысил твою репутацию. Твоя репутация ${reputationData.reputation}`,
             {
                 reply_markup: {
                     inline_keyboard: [

@@ -22,7 +22,11 @@ export class BotService implements OnModuleInit {
         )
 
         bot.on('message', async (msg) => {
-            console.log(msg)
+            if (msg?.sticker) {
+                if (msg.sticker.emoji === '👍') {
+                    console.log('AAAAAAAAAAA')
+                }
+            }
         })
     }
 }

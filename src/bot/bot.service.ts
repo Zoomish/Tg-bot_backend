@@ -24,7 +24,7 @@ export class BotService implements OnModuleInit {
         bot.on('message', async (msg) => {
             if (msg?.sticker) {
                 if (msg.sticker.emoji === '👍') {
-                    bot.sendMessage(msg.chat.id, `Репутация увеличена`)
+                    this.handleThanksWordReaction(msg, bot)
                 }
             }
         })

@@ -53,28 +53,16 @@ export class BotService implements OnModuleInit {
         await this.prisma.reputations.create({ data })
     }
 
-    async handleThanksWordReaction(msg: TelegramBot.Message, bot: TelegramBot) {
-        const telegramId = msg.reply_to_message.from.id
-        const avatarUrl = await this.getUserAvatarUrl(telegramId, bot)
-        const reputationData = await this.getReputation(String(telegramId))
-
-        if (reputationData) {
-            await this.updateReputation(
-                reputationData.reputation + 1,
-                reputationData.id
-            )
-            return
-        }
-        await this.addNewReputation({
-            telegramId: String(telegramId),
-            userName: msg.reply_to_message.from?.username || '',
-            userAvatar: avatarUrl,
-            fullName: `${msg.reply_to_message.from?.first_name} ${msg.reply_to_message.from?.last_name}`,
-        })
-
+    async sendReputationMessage(
+        chatId: number,
+        replyUserName: string,
+        fromUserName: string,
+        bot: TelegramBot,
+        telegramId: string
+    ) {
         bot.sendMessage(
-            msg.chat.id,
-            `Поздравляю, ${msg.reply_to_message.from?.first_name} ${
+            chatId,
+            `Поздравляю, ${replyUserName} ${
                 msg.reply_to_message.from?.username
                     ? `(@${msg.reply_to_message.from.username})`
                     : ''
@@ -95,6 +83,37 @@ export class BotService implements OnModuleInit {
                     ],
                 },
             }
+        )
+    }
+
+    async handleThanksWordReaction(msg: TelegramBot.Message, bot: TelegramBot) {
+        const telegramId = msg.reply_to_message.from.id
+        const avatarUrl = await this.getUserAvatarUrl(telegramId, bot)
+        const reputationData = await this.getReputation(String(telegramId))
+
+        if (reputationData) {
+            await this.updateReputation(
+                reputationData.reputation + 1,
+                reputationData.id
+            )
+            return
+        }
+        await this.addNewReputation({
+            telegramId: String(telegramId),
+            userName: msg.reply_to_message.from?.username || '',
+            userAvatar: avatarUrl,
+            fullName: `${msg.reply_to_message.from?.first_name} ${msg.reply_to_message.from?.last_name}`,
+        })
+        this.sendReputationMessage(
+            msg.chat.id,
+            `${msg.reply_to_message.from.first_name} ${
+                msg.reply_to_message.from?.username
+                    ? `(@${msg.reply_to_message.from.username})`
+                    : ''
+            }`,
+            msg.from.first_name,
+            bot,
+            String(telegramId)
         )
     }
 

@@ -13,5 +13,7 @@ export class BotService implements OnModuleInit {
     const bot = new TelegramBot(process.env.BOT_API_TOKEN, {
         polling: true
     })
+
+    bot.on('new_chat_members', (msg) => bot.sendMessage(msg.chat.id, `Привет, ${msg.new_chat_members}`))
   }
 }

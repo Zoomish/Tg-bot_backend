@@ -54,13 +54,9 @@ export class BotService implements OnModuleInit {
     }
 
     async handleThanksWordReaction(msg: TelegramBot.Message, bot: TelegramBot) {
-        const avatarUrl = await this.getUserAvatarUrl(
-            msg.reply_to_message.from.id,
-            bot
-        )
-        const reputationData = await this.getReputation(
-            String(msg.reply_to_message.from.id)
-        )
+        const telegramId = msg.reply_to_message.from.id
+        const avatarUrl = await this.getUserAvatarUrl(telegramId, bot)
+        const reputationData = await this.getReputation(String(telegramId))
 
         if (reputationData) {
             await this.updateReputation(
@@ -69,6 +65,12 @@ export class BotService implements OnModuleInit {
             )
             return
         }
+        await this.addNewReputation({
+            telegramId: String(telegramId),
+            userName: msg.reply_to_message.from?.username || '',
+            userAvatar: avatarUrl,
+            fullName: `${msg.reply_to_message.from.first_name} ${msg.reply_to_message.from.last_name}`,
+        })
     }
 
     async getUserAvatarUrl(userId: number, bot: TelegramBot) {

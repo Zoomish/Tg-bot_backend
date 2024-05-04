@@ -114,7 +114,7 @@ export class BotService implements OnModuleInit {
             `${msg.reply_to_message.from?.first_name} ${msg.reply_to_message.from?.last_name}`
         )
 
-        this.sendReputationMessage(
+        await this.sendReputationMessage(
             msg.chat.id,
             `${msg.reply_to_message.from.first_name} ${
                 msg.reply_to_message.from?.username

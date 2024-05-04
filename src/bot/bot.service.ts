@@ -15,5 +15,9 @@ export class BotService implements OnModuleInit {
         })
 
         bot.on('new_chat_members', (msg) => bot.sendMessage(msg.chat.id, `Привет, ${msg.new_chat_members[0].first_name}!`))
+
+        bot.on('message', async (msg) => {
+            console.log(msg);
+        })
     }
 }

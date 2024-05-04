@@ -14,6 +14,6 @@ export class BotService implements OnModuleInit {
         polling: true
     })
 
-    bot.on('new_chat_members', (msg) => bot.sendMessage(msg.chat.id, `Привет, ${msg.new_chat_members}`))
+    bot.on('new_chat_members', (msg) => bot.sendMessage(msg.chat.id, `Привет, ${msg.new_chat_members[0]}!`))
   }
 }

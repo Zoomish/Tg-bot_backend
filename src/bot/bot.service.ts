@@ -71,6 +71,15 @@ export class BotService implements OnModuleInit {
             userAvatar: avatarUrl,
             fullName: `${msg.reply_to_message.from?.first_name} ${msg.reply_to_message.from?.last_name}`,
         })
+
+        bot.sendMessage(
+            msg.chat.id,
+            `Поздравляю, ${msg.reply_to_message.from?.first_name} ${
+                msg.reply_to_message.from?.username
+                    ? '@' + msg.reply_to_message.from?.username
+                    : ''
+            } вы получили репутацию!`
+        )
     }
 
     async getUserAvatarUrl(userId: number, bot: TelegramBot) {

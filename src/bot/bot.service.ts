@@ -69,7 +69,7 @@ export class BotService implements OnModuleInit {
             telegramId: String(telegramId),
             userName: msg.reply_to_message.from?.username || '',
             userAvatar: avatarUrl,
-            fullName: `${msg.reply_to_message.from.first_name} ${msg.reply_to_message.from.last_name}`,
+            fullName: `${msg.reply_to_message.from?.first_name} ${msg.reply_to_message.from?.last_name}`,
         })
     }
 

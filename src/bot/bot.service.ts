@@ -11,9 +11,7 @@ export class BotService implements OnModuleInit {
     }
 
     async botMesssage() {
-        const bot = new TelegramBot(process.env.BOT_API_TOKEN, {
-            polling: true,
-        })
+        const bot = new TelegramBot(process.env.BOT_API_TOKEN)
         bot.setWebHook(process.env.HOOK)
         const thanksWords = ['спс', 'спасибо', 'заработало', '👍']
 

@@ -23,6 +23,10 @@ export class BotService implements OnModuleInit {
             )
         )
 
+        bot.on('left_chat_member', async (msg) =>
+            this.removeReputation(String(msg.left_chat_member.id))
+        )
+
         bot.on('message', async (msg) => {
             if (msg?.reply_to_message) {
                 if (
@@ -51,6 +55,19 @@ export class BotService implements OnModuleInit {
             }
         })
     }
+
+    async removeReputation(telegramId: string) {
+        const user = await this.prisma.reputations.findFirst({
+            where: { telegramId },
+        })
+
+        await this.prisma.reputations.delete({
+            where: {
+                id: user.id,
+            },
+        })
+    }
+
     async getReputation(telegramId: string): Promise<Reputations> {
         return await this.prisma.reputations.findFirst({
             where: {

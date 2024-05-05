@@ -14,6 +14,7 @@ export class BotService implements OnModuleInit {
         const bot = new TelegramBot(process.env.BOT_API_TOKEN, {
             polling: true,
         })
+        const thanksWords = ['спс', 'спасибо', 'заработало', '👍']
 
         bot.on('new_chat_members', (msg) =>
             bot.sendMessage(
@@ -27,6 +28,19 @@ export class BotService implements OnModuleInit {
                 if (msg.sticker.emoji === '👍') {
                     this.handleThanksWordReaction(msg, bot)
                 }
+                return
+            }
+            if (msg.reply_to_message) {
+                if (
+                    msg.reply_to_message.from.is_bot === true ||
+                    msg.reply_to_message.from.username === msg.from.username
+                ) {
+                    return
+                }
+                const thankword = msg.text
+                    .toLowerCase()
+                    .split(' ')
+                    .find((word) => thanksWords.includes(word))
             }
         })
     }

@@ -7,6 +7,6 @@ async function bootstrap() {
     app.enableCors()
     const prismaSerbice = app.get(PrismaService)
     await prismaSerbice.enableShutDownHooks(app)
-    await app.listen(process.env.PORT || 3000)
+    await app.listen(process.env.PORT)
 }
 bootstrap()

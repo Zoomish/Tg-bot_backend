@@ -45,6 +45,9 @@ export class BotService implements OnModuleInit {
                             word.replace(/[&\/\\#,+()$~%.'":*?!<>{}]/g, '')
                         )
                     )
+                if (thankword) {
+                    this.handleThanksWordReaction(msg, bot)
+                }
             }
         })
     }

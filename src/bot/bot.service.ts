@@ -65,12 +65,15 @@ export class BotService implements OnModuleInit {
         const user = await this.prisma.reputations.findFirst({
             where: { telegramId },
         })
-
-        await this.prisma.reputations.delete({
-            where: {
-                id: user.id,
-            },
-        })
+        if (user) {
+            await this.prisma.reputations.delete({
+                where: {
+                    id: user.id,
+                },
+            })
+        } else {
+            return
+        }
     }
 
     async getReputation(telegramId: string): Promise<Reputations> {

@@ -17,7 +17,6 @@ export class BotService implements OnModuleInit {
                 host: process.env.HOOK,
             },
         })
-        bot.setWebHook(process.env.HOOK)
         const thanksWords = ['спс', 'спасибо', 'заработало', '👍']
 
         bot.on('new_chat_members', (msg) =>

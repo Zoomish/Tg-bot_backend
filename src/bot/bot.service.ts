@@ -40,7 +40,11 @@ export class BotService implements OnModuleInit {
                 const thankword = msg.text
                     .toLowerCase()
                     .split(' ')
-                    .find((word) => thanksWords.includes(word))
+                    .find((word) =>
+                        thanksWords.includes(
+                            word.replace(/[&\/\\#,+()$~%.'":*?!<>{}]/g, '')
+                        )
+                    )
             }
         })
     }

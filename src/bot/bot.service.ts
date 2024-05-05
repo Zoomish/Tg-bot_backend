@@ -161,8 +161,8 @@ export class BotService implements OnModuleInit {
         await this.increaseReputation(
             String(telegramId),
             msg.reply_to_message.from?.username || '',
-            avatarUrl,
-            `${msg.reply_to_message.from?.first_name} ${msg.reply_to_message.from?.last_name}`
+            `${msg.reply_to_message.from?.first_name} ${msg.reply_to_message.from?.last_name}`,
+            avatarUrl
         )
 
         await this.sendReputationMessage(

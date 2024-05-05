@@ -6,6 +6,8 @@ export class AppController {
     constructor(private readonly botService: BotService) {}
     @Get()
     async getPerutations() {
-        return await this.botService.getReputation('123')
+        return (await this.botService.getAllReputations()).sort(
+            (a, b) => b.reputation - a.reputation
+        )
     }
 }

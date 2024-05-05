@@ -28,11 +28,11 @@ export class BotService implements OnModuleInit {
         )
 
         bot.on('message', async (msg) => {
-            const user = await bot.getChatMember(
-                msg.chat.id,
-                msg.reply_to_message.from.id
-            )
             if (msg?.reply_to_message) {
+                const user = await bot.getChatMember(
+                    msg.chat.id,
+                    msg.reply_to_message.from.id
+                )
                 if (
                     msg.reply_to_message.from.is_bot === true ||
                     msg.reply_to_message.from.username === msg.from.username ||

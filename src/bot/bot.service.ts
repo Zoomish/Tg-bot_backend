@@ -145,7 +145,7 @@ export class BotService implements OnModuleInit {
                         [
                             {
                                 text: 'Статистика чата',
-                                url: 'www.google.com',
+                                url: 'https://tg-bot-frontend-three.vercel.app',
                             },
                         ],
                     ],

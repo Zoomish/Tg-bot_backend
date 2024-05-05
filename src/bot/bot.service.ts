@@ -25,16 +25,16 @@ export class BotService implements OnModuleInit {
 
         bot.on('message', async (msg) => {
             if (msg?.reply_to_message) {
-                if (msg?.sticker) {
-                    if (msg.sticker.emoji === '👍') {
-                        this.handleThanksWordReaction(msg, bot)
-                    }
-                    return
-                }
                 if (
                     msg.reply_to_message.from.is_bot === true ||
                     msg.reply_to_message.from.username === msg.from.username
                 ) {
+                    return
+                }
+                if (msg?.sticker) {
+                    if (msg.sticker.emoji === '👍') {
+                        this.handleThanksWordReaction(msg, bot)
+                    }
                     return
                 }
                 const thankword = msg.text

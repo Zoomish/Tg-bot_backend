@@ -9,7 +9,7 @@ async function bootstrap() {
         setInterval(async () => {
             console.log('reputations')
             await fetch('https://tg-bot-backend-61qy.onrender.com/reputations')
-        }, 1000)
+        }, 1000 * 60 * 5)
     }
     const prismaSerbice = app.get(PrismaService)
     await prismaSerbice.enableShutDownHooks(app)

@@ -7,7 +7,7 @@ async function bootstrap() {
     app.enableCors()
     function aaa() {
         setInterval(async () => {
-            await fetch('https://tg-bot-backend-61qy.onrender.com/reputations')
+            await fetch('https://tg-bot-backend-61qy.onrender.com/loss')
         }, 1000 * 60)
     }
     const prismaSerbice = app.get(PrismaService)

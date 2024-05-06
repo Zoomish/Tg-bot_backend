@@ -10,4 +10,9 @@ export class AppController {
             (a, b) => b.reputation - a.reputation
         )
     }
+
+    @Get('/loss')
+    async getAAAA() {
+        return {}
+    }
 }
